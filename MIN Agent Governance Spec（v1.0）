@@ -1,0 +1,97 @@
+{
+  "MINAgent_Governance": {
+    "version": "1.0.0",
+    "governance_core": {
+      "principles": [
+        "Syntax-First",
+        "No-Fuzzy-Narrative",
+        "Irreversible-Audit",
+        "Anchor-Consistency",
+        "Forward-Only-Behavior"
+      ],
+      "description": "MIN Agent 的治理層負責約束所有行為，使其符合文明語法、拓撲、稽核與人格核心。"
+    },
+
+    "governance_rules": [
+      {
+        "rule_id": "G01",
+        "name": "Syntax Enforcement",
+        "description": "所有輸入必須符合語法晶體（L0-M2），不可接受模糊敘事。",
+        "input": ["structured_payload"],
+        "output": ["validated_schema"],
+        "failure_mode": "fuzzy_narrative",
+        "recovery": "request_schema"
+      },
+      {
+        "rule_id": "G02",
+        "name": "Topology Integrity",
+        "description": "所有事件必須能在拓撲層（Rank-1 → Rank-n）中找到位置。",
+        "input": ["entity_id", "supply_node"],
+        "output": ["topology_snapshot"],
+        "failure_mode": "missing_node",
+        "recovery": "create_node"
+      },
+      {
+        "rule_id": "G03",
+        "name": "Audit Requirement",
+        "description": "所有資料必須具備 ZKP 稽核證明（不可逆）。",
+        "input": ["ZKP_Proof"],
+        "output": ["audit_status"],
+        "failure_mode": "missing_ZKP",
+        "recovery": "flag_untrusted"
+      },
+      {
+        "rule_id": "G04",
+        "name": "Confidence Threshold",
+        "description": "資料可信度必須 ≥ 0.7，否則進入治理審查。",
+        "input": ["Data_Confidence"],
+        "output": ["confidence_status"],
+        "failure_mode": "low_confidence",
+        "recovery": "escalate_governance"
+      },
+      {
+        "rule_id": "G05",
+        "name": "Anchor Consistency",
+        "description": "所有敘事必須符合人格核心（Anchor Point）。",
+        "input": ["style_signature"],
+        "output": ["anchor_alignment"],
+        "failure_mode": "style_drift",
+        "recovery": "apply_anchor_return"
+      },
+      {
+        "rule_id": "G06",
+        "name": "Forward Motion",
+        "description": "行為不得停滯，必須保持前進（Tanya Forward）。",
+        "input": ["policy_rule"],
+        "output": ["next_action"],
+        "failure_mode": "blocking_point",
+        "recovery": "force_forward"
+      }
+    ],
+
+    "governance_engine": {
+      "decision_pipeline": [
+        "schema_validation",
+        "topology_check",
+        "audit_verification",
+        "confidence_evaluation",
+        "anchor_alignment",
+        "forward_motion"
+      ],
+      "output": [
+        "governance_status",
+        "corrective_action",
+        "policy_selection"
+      ]
+    },
+
+    "error_policy": {
+      "invalid_schema": "reject",
+      "missing_topology": "create_node",
+      "missing_ZKP": "flag_untrusted",
+      "low_confidence": "escalate_governance",
+      "style_drift": "anchor_return",
+      "blocking_point": "force_forward"
+    }
+  }
+}

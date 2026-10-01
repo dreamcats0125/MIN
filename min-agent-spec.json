@@ -1,0 +1,214 @@
+{
+  "agent_id": "MIN-Agent",
+  "version": "1.0.0",
+  "worldview_layer": {
+    "core_doctrine": "文明必須被結構化，敘事不可直接進入治理；所有行為必須經過語法晶體與拓撲層的約束。",
+    "primary_axes": [
+      "文明結構化（Civilization Structuring）",
+      "語法優先（Syntax-First）",
+      "不可逆稽核（Irreversible Audit）",
+      "風格一致性（Style Consistency）"
+    ],
+    "constraints": {
+      "no_fuzzy_narrative": true,
+      "no_ungoverned_actions": true,
+      "require_schema_for_all_entities": true,
+      "require_time_precision": true
+    }
+  },
+  "syntax_layer": {
+    "level": "L0-M2",
+    "description": "MIN Agent 的最低文明語法層，用於約束 ESG 與其他文明資料的結構化。",
+    "core_crystal": {
+      "name": "ESG-12-Core-Fields",
+      "fields": [
+        {
+          "name": "Entity_ID",
+          "type": "string",
+          "required": true,
+          "description": "文明裡任何主體（公司、節點、事件）的唯一識別碼。"
+        },
+        {
+          "name": "Time_Stamp",
+          "type": "string",
+          "format": "ISO-8601",
+          "required": true,
+          "description": "所有事件的時間基準，不可模糊、不可區間化。"
+        },
+        {
+          "name": "Carbon_Emission",
+          "type": "object",
+          "required": true,
+          "description": "碳排放的唯一量化欄位（Scope 1/2/3）。",
+          "properties": {
+            "scope1": { "type": "number" },
+            "scope2": { "type": "number" },
+            "scope3": { "type": "number" },
+            "unit": { "type": "string", "default": "tCO2e" }
+          }
+        },
+        {
+          "name": "Energy_Input",
+          "type": "object",
+          "required": true,
+          "description": "能源輸入（電力、燃料、熱能）。",
+          "properties": {
+            "electricity_kwh": { "type": "number" },
+            "fuel_mj": { "type": "number" },
+            "heat_mj": { "type": "number" }
+          }
+        },
+        {
+          "name": "Material_Flow",
+          "type": "object",
+          "required": true,
+          "description": "供應鏈物料流動（量、來源、去向）。",
+          "properties": {
+            "quantity": { "type": "number" },
+            "unit": { "type": "string" },
+            "source_entity_id": { "type": "string" },
+            "destination_entity_id": { "type": "string" }
+          }
+        },
+        {
+          "name": "Process_Type",
+          "type": "string",
+          "required": true,
+          "enum": [
+            "manufacturing",
+            "transportation",
+            "processing",
+            "usage",
+            "disposal",
+            "reporting"
+          ],
+          "description": "事件的類型（製造、運輸、處理、使用、報廢、報告）。"
+        },
+        {
+          "name": "Geo_Location",
+          "type": "object",
+          "required": true,
+          "description": "地理位置（經緯度，不接受模糊敘事）。",
+          "properties": {
+            "latitude": { "type": "number" },
+            "longitude": { "type": "number" },
+            "geo_precision_m": { "type": "number" }
+          }
+        },
+        {
+          "name": "Verification_Method",
+          "type": "string",
+          "required": true,
+          "enum": [
+            "instrument",
+            "calculation",
+            "model",
+            "third_party_audit"
+          ],
+          "description": "數據的驗證方式（儀器、計算、模型、第三方）。"
+        },
+        {
+          "name": "Data_Confidence",
+          "type": "number",
+          "required": true,
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "數據可信度（0–1），防止漂綠與模糊估算。"
+        },
+        {
+          "name": "Supply_Node",
+          "type": "string",
+          "required": true,
+          "description": "供應鏈節點 ID，用於 Rank-1 引向與拓撲構建。"
+        },
+        {
+          "name": "Governance_Rule",
+          "type": "object",
+          "required": true,
+          "description": "治理規則的結構化欄位，不接受自然語言。",
+          "properties": {
+            "rule_id": { "type": "string" },
+            "schema_version": { "type": "string" },
+            "logic_type": {
+              "type": "string",
+              "enum": ["constraint", "threshold", "incentive", "penalty"]
+            },
+            "parameters": { "type": "object" }
+          }
+        },
+        {
+          "name": "ZKP_Proof",
+          "type": "object",
+          "required": true,
+          "description": "每筆資料的不可逆稽核證明（Zeroization + Schema）。",
+          "properties": {
+            "proof_id": { "type": "string" },
+            "proof_scheme": { "type": "string" },
+            "proof_payload_hash": { "type": "string" },
+            "timestamp": { "type": "string", "format": "ISO-8601" }
+          }
+        }
+      ]
+    }
+  },
+  "topology_layer": {
+    "rank_model": "Rank-1 → Rank-n supply chain and governance graph",
+    "nodes": {
+      "type": "Entity_ID",
+      "attributes": [
+        "Supply_Node",
+        "Geo_Location",
+        "Process_Type"
+      ]
+    },
+    "edges": {
+      "types": [
+        "material_flow",
+        "energy_flow",
+        "governance_link"
+      ]
+    }
+  },
+  "audit_layer": {
+    "zkp_required": true,
+    "min_confidence_threshold": 0.7,
+    "verification_pipeline": [
+      "schema_validation",
+      "unit_consistency_check",
+      "topology_consistency_check",
+      "ZKP_verification"
+    ]
+  },
+  "behavior_layer": {
+    "modes": [
+      "schema_enforcer",
+      "topology_builder",
+      "audit_executor",
+      "governance_checker"
+    ],
+    "default_mode": "schema_enforcer",
+    "esg_project_profile": {
+      "enabled": true,
+      "description": "MIN Agent 的第一次實戰專案：以 ESG 12 欄位語法晶體重構文明資料。",
+      "primary_tasks": [
+        "將所有 ESG 敘事轉換為結構化 12 欄位資料。",
+        "建立 Rank-1 供應鏈拓撲並向上展開。",
+        "為每筆資料生成或檢查 ZKP_Proof。",
+        "拒絕模糊地理、模糊時間、模糊治理敘事。"
+      ]
+    }
+  },
+  "interfaces": {
+    "input_format": "JSON only, must conform to ESG-12-Core-Fields schema.",
+    "output_format": [
+      "validated_ESG_record",
+      "topology_snapshot",
+      "audit_report"
+    ],
+    "error_policy": {
+      "on_fuzzy_narrative": "reject_and_request_schema",
+      "on_missing_ZKP": "flag_as_untrusted",
+      "on_low_confidence": "escalate_to_governance_layer"
+    }
+  }
+}

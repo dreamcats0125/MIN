@@ -1,0 +1,18 @@
+{
+  "Rule_ID": "MIN_GENESIS_REGULATION",
+  "Execution_Mode": "Hard_Blocking",
+  "Constraints": {
+    "Min_Confidence_Threshold": 0.50,
+    "Required_Fields": [
+      "Entity_ID",
+      "Time_Stamp",
+      "Carbon_Emission",
+      "ZKP_Proof"
+    ],
+    "Allowed_Verification_Methods": [
+      "Hardware_Sensor_IoT",
+      "ZK_Telemetry_Model"
+    ]
+  },
+  "Violation_Action": "REJECT_TRANSACTION_AND_DOWNGRADE_採購配額"
+}

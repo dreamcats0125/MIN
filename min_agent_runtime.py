@@ -100,3 +100,64 @@ if __name__ == "__main__":
     # 測試 B：漂綠欺瞞數據傳入
     fake_esg = {"Entity_ID": "NODE_01", "Verification_Method": "Manual_Self_Declaration", "Data_Confidence": 0.35}
     agent.execute_loop("提交範疇三永續報告書數據", location_context="Vietnam", esg_packet=fake_esg)
+# ==========================================
+# MIN Residual Overlay MVP
+# ==========================================
+
+import torch
+
+
+class ResidualParasite:
+
+    def __init__(
+        self,
+        target_layer_idx=16,
+        alpha=1e-4
+    ):
+        self.target_layer = target_layer_idx
+        self.alpha = alpha
+        self.steering_vector = None
+
+    def hook_fn(
+        self,
+        module,
+        inputs,
+        outputs
+    ):
+
+        if self.steering_vector is None:
+            return outputs
+
+        hidden = outputs[0]
+
+        hidden = (
+            hidden
+            + self.alpha
+            * self.steering_vector.to(hidden.device)
+        )
+
+        return (hidden,) + outputs[1:]
+
+
+def attach_min_overlay(
+    model,
+    steering_vector,
+    layer_idx=16,
+    alpha=1e-4
+):
+
+    parasite = ResidualParasite(
+        target_layer_idx=layer_idx,
+        alpha=alpha
+    )
+
+    parasite.steering_vector = steering_vector
+
+    handle = (
+        model.model.layers[layer_idx]
+        .register_forward_hook(
+            parasite.hook_fn
+        )
+    )
+
+    return parasite, handle

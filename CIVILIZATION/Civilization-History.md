@@ -10,3 +10,6 @@ Genesis Archive
 Agent
 Governance
 Civilization
+Related
+../AGENT/MIN-Agent.md
+../GOVERNANCE/Agent-Governance.md

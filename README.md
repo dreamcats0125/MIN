@@ -98,3 +98,30 @@ Domains Established:
 ## Vision
 
 Build a human-readable and AI-readable knowledge system.
+## Knowledge Graph
+
+Civilization Charter
+
+↓
+
+Genesis Archive
+
+↓
+
+Governance
+
+↓
+
+MIN Agent
+
+↓
+
+Crystal Registry
+
+↓
+
+Logic Tear
+
+↓
+
+Historical Preservation

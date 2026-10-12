@@ -12,3 +12,5 @@ Roles
 可終止
 關聯
 MIN Agent
+Related
+../AGENT/MIN-Agent.md

@@ -13,3 +13,6 @@ Agent Runtime
 相關文件
 Agent Governance
 Civilization History
+Related
+../GOVERNANCE/Agent-Governance.md
+../CIVILIZATION/Civilization-History.md

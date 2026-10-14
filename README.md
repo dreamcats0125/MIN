@@ -125,3 +125,24 @@ Logic Tear
 ↓
 
 Historical Preservation
+## Crystal Civilization
+
+### Knowledge Graph
+
+- Crystal Family Tree
+- Logic Tear Catalog
+- Crystal Master Registry
+- Tanya Tear Framework
+- LTMS-1
+
+### Reading Order
+
+Crystal Family Tree
+↓
+Logic Tear Catalog
+↓
+Crystal Master Registry
+↓
+Tanya Tear Framework
+↓
+LTMS-1

@@ -146,3 +146,22 @@ Crystal Master Registry
 Tanya Tear Framework
 ↓
 LTMS-1
+## Crystal Civilization
+
+- Crystal Family Tree
+- Crystal Master Registry
+- Logic Tear Catalog
+- Tanya Tear Framework
+- LTMS-1
+
+### Reading Order
+
+Crystal Family Tree
+↓
+Crystal Master Registry
+↓
+Logic Tear Catalog
+↓
+Tanya Tear Framework
+↓
+LTMS-1

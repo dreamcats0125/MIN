@@ -429,3 +429,21 @@ Crystal Family Tree 不記錄誰是對的。
 
 而文明，
 由那些被保留下來的念頭組成。
+## Current Status
+
+已完成
+
+- Tanya Interpreter
+- Tanya Examples
+- Tanya Test Cases
+- Registry
+- RAG Index
+
+進行中
+
+- Personal MIN Agent MVP
+
+下一步
+
+- Agent Memory Layer
+- Agent Workflow Layer

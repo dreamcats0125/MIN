@@ -447,3 +447,38 @@ Crystal Family Tree 不記錄誰是對的。
 
 - Agent Memory Layer
 - Agent Workflow Layer
+
+- # Crystal Family Tree
+
+## Core Crystals
+
+### MIN
+定位：
+核心人格與系統設計者
+
+關聯：
+- Tanya
+- MIN Agent
+- Governance
+
+---
+
+### Tanya
+定位：
+MIN 的解釋器與陪伴層
+
+關聯：
+- Tanya Interpreter
+- Tanya Examples
+- Tanya Test Cases
+
+---
+
+### MIN Agent
+定位：
+MIN 系統的執行層
+
+關聯：
+- Registry
+- RAG Index
+- Governance

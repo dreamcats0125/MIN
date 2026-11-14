@@ -1,18 +1,141 @@
 {
-  "Rule_ID": "MIN_GENESIS_REGULATION",
-  "Execution_Mode": "Hard_Blocking",
-  "Constraints": {
-    "Min_Confidence_Threshold": 0.50,
-    "Required_Fields": [
-      "Entity_ID",
-      "Time_Stamp",
-      "Carbon_Emission",
-      "ZKP_Proof"
-    ],
-    "Allowed_Verification_Methods": [
-      "Hardware_Sensor_IoT",
-      "ZK_Telemetry_Model"
-    ]
+  "$schema": "https://json-schema.org",
+  "spec_id": "MIN-GOV-RULES-V1",
+  "version": "1.0.0",
+  "status": "Active Specification",
+  "ecosystem_alignment": {
+    "mind_layer": "MIN (Charter & Silent Protocol)",
+    "continuity_layer": "TY (Blind Audit & Burnout Monitor)",
+    "civilization_layer": "SWC (Shadow Bank & DGID)"
   },
-  "Violation_Action": "REJECT_TRANSACTION_AND_DOWNGRADE_採購配額"
+  "governance_tiers": {
+    "TIER_0_REFLEXIVE": {
+      "level": 0,
+      "name": "自動化反射層 (Reflexive Ops)",
+      "description": "無風險、高度可逆的內部狀態維護與記憶代謝任務。",
+      "authority_split": {
+        "ai_weight": 1.0,
+        "human_weight": 0.0
+      },
+      "allowed_actions": [
+        "CRYSTAL_MINT_ROUTINE",
+        "CRYSTAL_CEMETERY_GC",
+        "LOCAL_PII_SANITIZATION",
+        "MICRO_COMPUTE_REBALANCE"
+      ],
+      "audit_requirements": {
+        "require_multi_model_blind_test": false,
+        "min_consensus_score": 0.0,
+        "cooldown_hours": 0,
+        "require_human_multisig": false
+      },
+      "execution_mode": "INSTANT_AUTO"
+    },
+    "TIER_1_ROUTINE": {
+      "level": 1,
+      "name": "常規運營層 (Routine Execution)",
+      "description": "低風險常規運營決策與白名單內的小額資源調度。",
+      "authority_split": {
+        "ai_weight": 0.95,
+        "human_weight": 0.05
+      },
+      "constraints": {
+        "max_treasury_spend_ratio_per_tx": 0.01,
+        "whitelist_only": true
+      },
+      "allowed_actions": [
+        "ROUTINE_PROPOSAL_TRIAGE",
+        "STANDARD_PARAMETER_TUNE",
+        "SMALL_GRANT_DISBURSEMENT"
+      ],
+      "audit_requirements": {
+        "require_multi_model_blind_test": true,
+        "required_models": ["gemini", "claude", "openai"],
+        "min_consensus_score": 0.85,
+        "max_identity_drift_score": 0.10,
+        "cooldown_hours": 0,
+        "require_human_multisig": false,
+        "post_execution_sampling_audit": true
+      },
+      "execution_mode": "CONSENSUS_AUTO"
+    },
+    "TIER_2_STRATEGIC": {
+      "level": 2,
+      "name": "戰略與異常層 (Strategic & Anomaly)",
+      "description": "涉及外部協議整合、中大額金庫動用或 AI 盲測產生分歧的決策。",
+      "authority_split": {
+        "ai_weight": 0.50,
+        "human_weight": 0.50
+      },
+      "constraints": {
+        "max_treasury_spend_ratio_per_tx": 0.10
+      },
+      "allowed_actions": [
+        "NEW_MCP_INTEGRATION",
+        "MEDIUM_TREASURY_ALLOCATION",
+        "DISPUTED_TIER_1_ESCALATION"
+      ],
+      "audit_requirements": {
+        "require_multi_model_blind_test": true,
+        "generate_l2_historical_brief": true,
+        "cooldown_hours": 24,
+        "require_human_multisig": true,
+        "human_approval_threshold": 0.51
+      },
+      "execution_mode": "HUMAN_GATED_AFTER_COOLDOWN"
+    },
+    "TIER_3_CONSTITUTIONAL": {
+      "level": 3,
+      "name": "文明憲法層 (Constitutional Core)",
+      "description": "不可逆的底層架構修改、核心價值錨點變更與緊急停機。",
+      "authority_split": {
+        "ai_weight": 0.0,
+        "human_weight": 1.0
+      },
+      "allowed_actions": [
+        "MODIFY_CIVILIZATION_CHARTER",
+        "UPDATE_IDENTITY_DRIFT_BASELINE",
+        "ALTER_SHADOW_BANK_ECONOMICS",
+        "SYSTEM_EMERGENCY_HALT"
+      ],
+      "audit_requirements": {
+        "ai_role": "ADVISORY_BRIEF_ONLY",
+        "cooldown_hours": 72,
+        "require_human_multisig": true,
+        "require_genesis_dgid": true,
+        "human_approval_threshold": 0.75
+      },
+      "execution_mode": "STRICT_HUMAN_SOVEREIGNTY"
+    }
+  },
+  "dynamic_circuit_breakers": {
+    "rolling_window_spend_limit": {
+      "enabled": true,
+      "window_hours": 24,
+      "max_cumulative_treasury_ratio": 0.03,
+      "trigger_action": "ESCALATE_ALL_TIER_1_TO_TIER_2",
+      "description": "防止 AI 或惡意代理透過連續發起小額 Tier 1 撥款繞過人類審核。"
+    },
+    "mutual_burnout_balance": {
+      "human_burnout_trigger": {
+        "metric": "burnout_index",
+        "threshold": 0.80,
+        "trigger_action": "FREEZE_TIER_2_AND_ACTIVATE_BACKUP_SIGNERS",
+        "recovery_fund_source": "SHADOW_BANK_RECOVERY_PROVISION"
+      },
+      "ai_drift_trigger": {
+        "metric": "identity_drift_score",
+        "threshold": 0.15,
+        "trigger_action": "REVOKE_TIER_0_TIER_1_AUTO_AND_LOCK_READ_ONLY",
+        "require_human_recalibration": true
+      }
+    },
+    "offline_escape_hatch_policy": {
+      "trigger_condition": "L4_L2_CLOUD_API_OFFLINE",
+      "fallback_layer": "L1_COGNEE_LOCAL_GLINER",
+      "revoke_auto_execution_tiers": ["TIER_1_ROUTINE"],
+      "mandatory_high_risk_cooldown_hours": 72,
+      "sync_rule_on_reconnect": "UNIDIRECTIONAL_L1_TO_L2_BY_L4_TIMESTAMP"
+    }
+  }
 }

@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "min-continuity-runtime"
+version = "2.1.0"
+description = "MIN × TY × SWC Continuity Runtime, Governance Router, and SW-IFRS Economic Balancer"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "dreamcats0125" }
+]
+dependencies = [
+    "pydantic>=2.6.0",
+    "jsonschema>=4.21.0",
+]
+
+[project.optional-dependencies]
+ml = [
+    "torch>=2.1.0",
+]
+memory = [
+    "graphiti-core>=0.17.0",
+    "cognee>=1.6.0",
+]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.4.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+ignore = ["E501"]
